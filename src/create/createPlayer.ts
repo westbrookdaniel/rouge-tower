@@ -8,6 +8,12 @@ export function createPlayer([x, y]: Vec, size: number) {
     scaleMode: PIXI.SCALE_MODES.NEAREST,
   })
 
+  c.x = x
+  c.y = y
+  c.width = size
+  c.height = size
+  c.anchor.set(0.5)
+
   const body = Bodies.rectangle(x, y, size, size)
   body.frictionAir = 1
   body.friction = 0.1
@@ -16,11 +22,6 @@ export function createPlayer([x, y]: Vec, size: number) {
   body.mass = 1
 
   physics.sync(c, body)
-
-  c.x = x
-  c.y = y
-  c.width = size
-  c.height = size
 
   const vel = 1
   const jumpForce = -40
