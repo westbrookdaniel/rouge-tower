@@ -1,3 +1,3 @@
-# ball-game
+# rouge-tower
 
-A basic ball game made with pixijs
+Rouge attack game

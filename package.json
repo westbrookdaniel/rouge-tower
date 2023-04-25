@@ -1,5 +1,5 @@
 {
-  "name": "ball-game",
+  "name": "rouge-tower",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/matter-js": "^0.18.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.0"
   },
   "dependencies": {
+    "matter-js": "^0.19.0",
     "pixi.js": "^7.2.4"
   }
 }

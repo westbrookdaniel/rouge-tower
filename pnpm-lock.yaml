@@ -1,11 +1,17 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  matter-js:
+    specifier: ^0.19.0
+    version: 0.19.0
   pixi.js:
     specifier: ^7.2.4
     version: 7.2.4(@pixi/utils@7.2.4)
 
 devDependencies:
+  '@types/matter-js':
+    specifier: ^0.18.2
+    version: 0.18.2
   typescript:
     specifier: ^5.0.2
     version: 5.0.2
@@ -572,6 +578,10 @@ packages:
     resolution: {integrity: sha512-w8oigUCDjElRHRRrMvn/spybSMyX8MTkKA5Dv+tS1IE/TgmNZPqUYtvYBXGY8cieSE66gm+szeK+bnbxC2xHTQ==}
     dev: false
 
+  /@types/matter-js@0.18.2:
+    resolution: {integrity: sha512-W9UC9DOPNBRTUocqqPZmzX3cbHmlZBI9jLn6SuxZz0n5QrPk382Ig3hbBWHqYU8TRUmTCJJhuanXeyMTavF7Mg==}
+    dev: true
+
   /@types/offscreencanvas@2019.7.0:
     resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
     dev: false
@@ -628,6 +638,10 @@ packages:
 
   /ismobilejs@1.1.1:
     resolution: {integrity: sha512-VaFW53yt8QO61k2WJui0dHf4SlL8lxBofUuUmwBo0ljPk0Drz2TiuDW4jo3wDcv41qy/SxrJ+VAzJ/qYqsmzRw==}
+    dev: false
+
+  /matter-js@0.19.0:
+    resolution: {integrity: sha512-v2huwvQGOHTGOkMqtHd2hercCG3f6QAObTisPPHg8TZqq2lz7eIY/5i/5YUV8Ibf3mEioFEmwibcPUF2/fnKKQ==}
     dev: false
 
   /nanoid@3.3.6:
