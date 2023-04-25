@@ -19,19 +19,28 @@ export function createPlayer([x, y]: Vec, size: number) {
   body.friction = 0.1
   body.restitution = 0.1
   body.inertia = Infinity
+  body.inverseInertia = 0
   body.mass = 1
 
   physics.sync(c, body)
 
   const vel = 1
-  const jumpForce = -40
+  const jumpForce = -25
 
-  let isGrounded = true
+  let jumps = 2
+  let lastJump = 0
 
   app.ticker.add(() => {
+    // left right movement
     if (keys.isDown(['ArrowLeft', 'a', 'A'])) {
       body.force.x = -vel
+
+      // when moving left flip the sprite
+      c.scale.x = -Math.abs(c.scale.x)
+    } else {
+      c.scale.x = Math.abs(c.scale.x)
     }
+
     if (keys.isDown(['ArrowRight', 'd', 'D'])) {
       body.force.x = vel
     }
@@ -39,17 +48,18 @@ export function createPlayer([x, y]: Vec, size: number) {
     // on colliding with something set isGrounded to true
     const collisions = physics.collides(body)
     if (collisions.length > 0) {
-      isGrounded = true
+      jumps = 2
     }
 
     // up jump (can only jump if on ground)
     if (
       keys.isDown(['ArrowUp', 'w', 'W']) &&
-      body.velocity.y < 10 &&
-      isGrounded
+      jumps > 0 &&
+      app.ticker.lastTime - lastJump > 200
     ) {
       body.force.y = jumpForce
-      isGrounded = false
+      jumps -= 1
+      lastJump = app.ticker.lastTime
     }
   })
 

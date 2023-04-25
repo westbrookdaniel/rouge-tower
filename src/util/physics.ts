@@ -19,14 +19,13 @@ export class Physics {
    * Syncs a PIXI.Container with a Matter.Body
    * It will be added / and removed from the world automatically
    *
-   * The rotatio anchor for the container needs to be the center
+   * The rotation anchor for the container needs to be the center
    */
   sync(c: PIXI.Container, body: Body) {
     const sync = () => {
       c.x = body.position.x + c.width / 2
       c.y = body.position.y + c.height / 2
       c.rotation = body.angle
-      console.log(c, body)
     }
 
     c.on('added', () => {
