@@ -1,6 +1,13 @@
 import * as PIXI from 'pixi.js'
 import { Query, Body, Engine, World } from 'matter-js'
 import { app } from '../main'
+import { Vec } from '../types'
+
+function hasAnchor(
+  c: PIXI.Container
+): c is PIXI.Container & { anchor: PIXI.ObservablePoint<any> } {
+  return 'anchor' in c
+}
 
 export class Physics {
   engine = Engine.create({
@@ -21,7 +28,15 @@ export class Physics {
    *
    * The pivot needs to be set so the size/rotation happens from the center
    */
-  sync(c: PIXI.Container, body: Body) {
+  sync(c: PIXI.Container, body: Body, pivot?: Vec) {
+    if (hasAnchor(c)) {
+      c.anchor.set(0.5)
+    } else if (pivot) {
+      c.pivot.set(...pivot)
+    } else {
+      c.pivot.set(c.width / 2, c.height / 2)
+    }
+
     const sync = () => {
       c.x = body.position.x + c.width / 2
       c.y = body.position.y + c.height / 2

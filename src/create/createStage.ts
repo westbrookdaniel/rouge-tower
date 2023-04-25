@@ -18,10 +18,6 @@ export function createStage(stage: string[]) {
 
   stage.map((row, y) => {
     row.split('').forEach((char, x) => {
-      // if (char === '+') {
-      //   const spawner = createSpawner([x * GRID_SIZE, y * GRID_SIZE])
-      //   return container.addChild(spawner)
-      // }
       if (char === '-') {
         const floor = createCollider(
           [x * SIZE, y * SIZE - SIZE / 4],
@@ -31,11 +27,7 @@ export function createStage(stage: string[]) {
         return container.addChild(floor)
       }
       if (char === '=') {
-        const floor = createCollider(
-          [x * SIZE, y * SIZE],
-          [SIZE, SIZE],
-          [SIZE / 2, SIZE / 2]
-        )
+        const floor = createCollider([x * SIZE, y * SIZE], [SIZE, SIZE])
         return container.addChild(floor)
       }
       if (char === '@') {

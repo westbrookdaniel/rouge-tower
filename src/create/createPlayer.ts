@@ -12,7 +12,6 @@ export function createPlayer([x, y]: Vec, size: number) {
   c.y = y
   c.width = size
   c.height = size
-  c.anchor.set(0.5)
 
   const body = Bodies.rectangle(x, y, size, size)
   body.frictionAir = 1
