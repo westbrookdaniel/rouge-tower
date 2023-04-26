@@ -21,7 +21,9 @@ export function createStage(stage: string[]) {
   stage.map((row, y) => {
     row.split('').forEach((char, x) => {
       if (char === '+') {
-        createSpawner((pos) => createSlime(pos, SIZE), [x * SIZE, y * SIZE])
+        return container.addChild(
+          createSpawner((pos) => createSlime(pos, SIZE), [x * SIZE, y * SIZE])
+        )
       }
       if (char === '-') {
         const floor = createCollider(
@@ -41,6 +43,36 @@ export function createStage(stage: string[]) {
       }
     })
   })
+
+  // right wall
+  container.addChild(
+    createCollider(
+      // width, height (origin is top left)
+      [STAGE_WIDTH * SIZE, (STAGE_WIDTH * SIZE) / 2 - SIZE / 2],
+      // x, y
+      [SIZE, STAGE_WIDTH * SIZE],
+      // offset (origin is center)
+      [SIZE / 2, STAGE_WIDTH * SIZE]
+    )
+  )
+
+  // left wall
+  container.addChild(
+    createCollider(
+      [-SIZE, (STAGE_WIDTH * SIZE) / 2 - SIZE / 2],
+      [SIZE, STAGE_WIDTH * SIZE],
+      [SIZE / 2, STAGE_WIDTH * SIZE]
+    )
+  )
+
+  // top wall
+  container.addChild(
+    createCollider(
+      [(STAGE_WIDTH * SIZE) / 2, -SIZE],
+      [STAGE_WIDTH * SIZE, SIZE],
+      [STAGE_WIDTH * SIZE, SIZE / 2]
+    )
+  )
 
   app.stage.addChild(container)
 }
