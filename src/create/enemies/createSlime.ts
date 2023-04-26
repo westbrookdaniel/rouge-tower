@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js'
 import { Vec } from '../../types'
 import { app, keys, physics } from '../../main'
 import { Bodies } from 'matter-js'
+import { random } from '../../util/random'
 
 export function createSlime([x, y]: Vec, size: number) {
   const c = PIXI.Sprite.from('assets/slime.png', {
@@ -14,7 +15,7 @@ export function createSlime([x, y]: Vec, size: number) {
   c.height = size
 
   const body = Bodies.rectangle(x, y, size, size)
-  body.frictionAir = 1
+  body.frictionAir = 3
   body.friction = 0.1
   body.restitution = 0.1
   body.inertia = Infinity
@@ -26,23 +27,22 @@ export function createSlime([x, y]: Vec, size: number) {
   const vel = 1
   const jumpForce = -25
 
-  let jumps = 2
+  let jumps = 1
   let lastJump = 0
 
   app.ticker.add(() => {
-    // left right movement
-    if (keys.isDown(['ArrowLeft', 'a', 'A'])) {
-      body.force.x = -vel
+    // if (keys.isDown(['ArrowLeft', 'a', 'A'])) {
+    //   body.force.x = -vel
 
-      // when moving left flip the sprite
-      c.scale.x = -Math.abs(c.scale.x)
-    } else {
-      c.scale.x = Math.abs(c.scale.x)
-    }
+    //   // when moving left flip the sprite
+    //   c.scale.x = -Math.abs(c.scale.x)
+    // } else {
+    //   c.scale.x = Math.abs(c.scale.x)
+    // }
 
-    if (keys.isDown(['ArrowRight', 'd', 'D'])) {
-      body.force.x = vel
-    }
+    // if (keys.isDown(['ArrowRight', 'd', 'D'])) {
+    body.force.x = vel
+    // }
 
     // on colliding with something set isGrounded to true
     const collisions = physics.collides(body)
@@ -52,7 +52,7 @@ export function createSlime([x, y]: Vec, size: number) {
 
     // up jump (can only jump if on ground)
     if (
-      keys.isDown(['ArrowUp', 'w', 'W']) &&
+      random(0, 100) < 1 && // 1% chance of jumping
       jumps > 0 &&
       app.ticker.lastTime - lastJump > 200
     ) {

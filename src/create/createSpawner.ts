@@ -4,21 +4,15 @@ import { app } from '../main'
 
 export function createSpawner(
   create: (pos: Vec) => PIXI.Container,
-  [x, y]: Vec,
-  [w, h]: Vec
+  [x, y]: Vec
 ) {
-  const c = new PIXI.Container()
-
-  c.x = x
-  c.y = y
-  c.width = w
-  c.height = h
+  const spawned = []
 
   app.ticker.add(() => {
-    if (c.children.length === 0) {
-      c.addChild(create([c.x, c.y]))
+    if (spawned.length === 0) {
+      const c = create([x, y])
+      spawned.push(c)
+      app.stage.addChild(c)
     }
   })
-
-  return c
 }

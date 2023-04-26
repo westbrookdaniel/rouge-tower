@@ -21,12 +21,7 @@ export function createStage(stage: string[]) {
   stage.map((row, y) => {
     row.split('').forEach((char, x) => {
       if (char === '+') {
-        const spawner = createSpawner(
-          (pos) => createSlime(pos, SIZE),
-          [x * SIZE, y * SIZE],
-          [SIZE, SIZE]
-        )
-        return container.addChild(spawner)
+        createSpawner((pos) => createSlime(pos, SIZE), [x * SIZE, y * SIZE])
       }
       if (char === '-') {
         const floor = createCollider(
