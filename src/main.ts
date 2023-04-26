@@ -25,7 +25,7 @@ export const physics = new Physics()
 createStage([
   '           ',
   '           ',
-  '+         +',
+  '+          ',
   '=---   ---=',
   '           ',
   '     @     ',

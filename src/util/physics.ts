@@ -29,10 +29,10 @@ export class Physics {
    * The pivot needs to be set so the size/rotation happens from the center
    */
   sync(c: PIXI.Container, body: Body, pivot?: Vec) {
-    if (hasAnchor(c)) {
-      c.anchor.set(0.5)
-    } else if (pivot) {
+    if (pivot) {
       c.pivot.set(...pivot)
+    } else if (hasAnchor(c)) {
+      c.anchor.set(0.5)
     } else {
       c.pivot.set(c.width / 2, c.height / 2)
     }

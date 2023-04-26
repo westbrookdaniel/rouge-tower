@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js'
 import { createCollider } from './createCollider'
 import { app } from '../main'
 import { createPlayer } from './createPlayer'
+import { createSpawner } from './createSpawner'
+import { createSlime } from './enemies/createSlime'
 
 const STAGE_WIDTH = 11
 
@@ -18,6 +20,14 @@ export function createStage(stage: string[]) {
 
   stage.map((row, y) => {
     row.split('').forEach((char, x) => {
+      if (char === '+') {
+        const spawner = createSpawner(
+          (pos) => createSlime(pos, SIZE),
+          [x * SIZE, y * SIZE],
+          [SIZE, SIZE]
+        )
+        return container.addChild(spawner)
+      }
       if (char === '-') {
         const floor = createCollider(
           [x * SIZE, y * SIZE - SIZE / 4],
